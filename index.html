@@ -30,14 +30,6 @@
           <h4 class="red">O silniku, który napędza JavaScript</h4>
           <h6 class="fragment">oraz szybki przegląd nowości</h6>
 				</section>
-				<section>
-					<section>
-						<h3>Troszkę o mnie</h3>
-						<p class="fragment">
-							Test
-						</p>
-					</section>
-				</section>
 				<section data-background="images/letsrock.gif">
 					<h2>No to jedziemy!</h2>
 				</section>
@@ -125,7 +117,7 @@
           <section>
 						<h3>No dobra, to już ostatnie!</h3>
 						<ul>
-							<li>Promise.finally() (ES9)</li>
+							<li>Promise.prototype.finally() (ES9)</li>
 							<li>Rest, Spread in objects (ES9)</li>
               <li>Array.flat/flatMap (ES10)</li>
               <li>String.trimStart/trimEnd (ES10)</li>
@@ -243,7 +235,7 @@ class Vehicle {
                         </code></pre>
                     </section>
                     <section>
-                        <h4>Classes</h4>
+                        <h4>Klasy</h4>
                         <p>Prostsze dziedziczenie</p>
                         <pre><code class="hljs">
 class Car extends Vehicle {
@@ -258,7 +250,7 @@ class Car extends Vehicle {
                         </code></pre>
                     </section>
                     <section>
-                        <h4>Classes</h4>
+                        <h4>Klasy</h4>
                         <p>get / set / static</p>
                         <pre><code class="hljs">
 class Car {
@@ -274,20 +266,20 @@ class Car {
     return this._name;
   }
 
-  static create(name, type) {
-    return new Car(name, type);
+  static create(name) {
+    return new Car(name);
   }
 }
 
-const newCar = new Car("Fiat Multipla");
-newCar.name = "Fiat 500";
-console.log(newCar.name); // Zwróci "Fiat 500"
+const car = new Car("Fiat Multipla");
+car.name = "Fiat 500";
+console.log(car.name); // Zwróci "Fiat 500"
 
-Car.create("Ford", "car"); // Zwraca nowy obiekt typu Car
+Car.create("Ford"); // Zwraca nowy obiekt typu Car
                         </code></pre>
                     </section>
                     <section>
-                        <h4>Classes</h4>
+                        <h4>Klasy</h4>
                         <p>Wyrażenia klasowe</p>
                         <pre><code class="hljs">
 let Car = class {
@@ -301,9 +293,9 @@ let Car = class {
                 <section>
                     <section>
                         <h3>Arrow functions</h3>
-                        <p>New shorter syntax for function expression</p>
+                        <p>Nowy krótszy zapis dla wyrażeń funkcyjnych</p>
                         <div class="left-box">
-                            <p>Before</p>
+                            <p>Kiedyś</p>
                             <pre><code class="hljs">
 var test = function (value) {
   return value * 2;
@@ -311,9 +303,9 @@ var test = function (value) {
                             </code></pre>
                         </div>
                         <div class="right-box">
-                            <p>Now</p>
+                            <p>Obecnie</p>
                             <pre><code class="hljs">
-let test = (value) => {
+const test = (value) => {
   return value * 2;
 };
                             </code></pre>
@@ -322,7 +314,7 @@ let test = (value) => {
                     <section>
                         <h4>Arrow functions</h4>
                         <div>
-                            <p>IIFE with Arrow Function</p>
+                            <p>Funkcja natychmiastowa z użyciem funkcji strzałkowej</p>
                             <pre><code class="hljs">
 (() => {
   // some code
@@ -330,44 +322,49 @@ let test = (value) => {
                             </code></pre>
                         </div>
                         <div>
-                            <p>Even shorter syntax for functions with only return statement</p>
+                            <p>Skrócony zapis w przypadku funkcji zwracających wynik</p>
                             <pre><code class="hljs">
-let test = (value) => value * 2;
+const test = value => value * 2;
                             </code></pre>
                         </div>
                     </section>
                     <section>
-                        <h4>Arrow functions - Automatic binding</h4>
-                        <div>
-                            <p>Before</p>
-                            <pre><code class="hljs">
+                      <h4>Arrow functions</h4>
+                      <p>Automatyczne wiązanie kontekstu</p>
+                      <div>
+                          <p>Kiedyś</p>
+                          <pre><code class="hljs">
 function Person() {
-    var that = this;
-    that.age = 0;
+  var that = this;
+  that.age = 0;
 
-    setInterval(function() {
-        that.age++;
-    }, 1000);
+  setInterval(function() {
+    that.age++;
+  }, 1000);
 }
-                            </code></pre>
-                        </div>
+                        </code></pre>
+                      </div>
+                    </section>
+                    <section>
+                        <h4>Arrow functions</h4>
+                        <p>Automatyczne wiązanie kontekstu</p>
                         <div>
-                            <p>Now</p>
+                            <p>Obecnie</p>
                             <pre><code class="hljs">
-function Person(){
+  function Person() {
     this.age = 0;
-
+  
     setInterval(() => {
-        this.age++;
+      this.age++;
     }, 1000);
-}
-                            </code></pre>
-                        </div>
+  }
+                              </code></pre>
+                          </div>
                     </section>
                 </section>
                 <section>
                     <section>
-                        <h3>Modules</h3>
+                        <h3>Moduły</h3>
                         <p>Now we can write modular JS code natively!</p>
                         <p class="fragment">ES6 Modules are in strict mode by default (bye bye "use strict")</p>
                     </section>
@@ -918,15 +915,15 @@ console.log(set); // WeakSet {1, '1', Object {key: 'value'}}
                     </section>
                 </section>
 				<section>
-					<h3>Exponentiation operator (ES7)</h3>
+					<h3>Operator potęgowania (ES7)</h3>
 					<div class="left-box">
-						<p>Before</p>
+						<p>Kiedyś</p>
 						<pre><code class="hljs">
 Math.pow(2, 4);
 						</code></pre>
 					</div>
 					<div class="right-box">
-						<p>Now</p>
+						<p>Obecnie</p>
 						<pre><code class="hljs">
 2 ** 2;
 						</code></pre>
@@ -934,7 +931,7 @@ Math.pow(2, 4);
 				</section>
 				<section>
 					<section>
-						<h3>New Array Methods</h3>
+						<h3>Nowe metody tablic</h3>
 						<ul>
 							<li>Array.from()</li>
 							<li>Array.of()</li>
@@ -951,17 +948,22 @@ Math.pow(2, 4);
 						<h4>Array.from()</h4>
 						<pre><code class="hljs">
 function args() {
-    Array.from(arguments).forEach(function (arg) {
-        console.log(arg);
-    });
+  Array.from(arguments).forEach(function (arg) {
+    console.log(arg);
+  });
 }
 						</code></pre>
 					</section>
 					<section>
 						<h4>Array.of()</h4>
 						<pre><code class="hljs">
-Array.of(1, 2, 3);
-// Array [1, 2, 3]
+Array.of(1, 2, 3); // Array [1, 2, 3]
+
+Array.of(256); // Array [256]
+
+new Array(1, 2, 3); // ?
+
+new Array(256); // ?
 						</code></pre>
 					</section>
 					<section>
@@ -971,8 +973,10 @@ Array.of(1, 2, 3);
 						<pre><code class="hljs">
 Array.from([ 'a', 'b' ].entries());
 // [ [ 0, 'a' ], [ 1, 'b' ] ]
+
 Array.from([ 'a', 'b' ].keys());
 // [ 0, 1 ]
+
 Array.from([ 'a', 'b' ].values());
 // [ 'a', 'b' ]
 						</code></pre>
@@ -982,66 +986,136 @@ Array.from([ 'a', 'b' ].values());
 						<h4>Array.prototype.findIndex()</h4>
 						<pre><code class="hljs">
 [6, -5, 8].find(x => x < 0);  // -5
+
 [6, 5, 8].find(x => x < 0);  // undefined
+
 [6, -5, 8].findIndex(x => x < 0);  // 1
+
 [6, 5, 8].findIndex(x => x < 0);  // -1
 						</code></pre>
 					</section>
 					<section>
 						<h4>Array.prototype.fill()</h4>
 						<pre><code class="hljs">
-['a', 'b', 'c'].fill(7);
-// [ 7, 7, 7 ]
+['a', 'b', 'c'].fill(7);  // [ 7, 7, 7 ]
 						</code></pre>
 					</section>
 					<section>
 						<h4>Array.prototype.includes() (ES7)</h4>
 						<pre><code class="hljs">
 ["a", "b", "c"].includes("a");  // true
+
 ["a", "b", "c"].includes("d");  // false
 						</code></pre>
 					</section>
 				</section>
         <section>
             <section>
-                <h3>Async Functions (ES8)</h3>
-                <p>The hottest thing!</p>
+                <h3>Funkcje asynchroniczne (ES8)</h3>
+                <p class="red">Gorąca nowość!</p>
                 <ul>
-                    <li class="fragment">It is a new way to write asynchronous code</li>
-                    <li class="fragment">Async function is built on top of promises</li>
-                    <li class="fragment">Async function is non blocking</li>
-                    <li class="fragment">Code is prettier, because looks like synchronous</li>
+                    <li class="fragment">Nowy sposób na pisanie asynchronicznego kodu</li>
+                    <li class="fragment">Funkcje asynchroniczne są zbudowane na fundamentach obietnic</li>
+                    <li class="fragment">Funkcje asynchroniczne nie blokują głównego wątku</li>
+                    <li class="fragment">Kod jest ładniejszy, ponieważ wygląda jak synchroniczny</li>
                 </ul>
             </section>
             <section>
-                <h4>Async Functions (ES8)</h4>
+                <h4>Funkcje asynchroniczne (ES8)</h4>
                 <div>
                     <pre><code class="hljs">
 const makeRequest = async () => {
-    console.log(await getJSON());
-    return "done";
+  const data = await fetch("endpoint");
+  return data;
 };
                             </code></pre>
                         </div>
                         <div>
-                            <p>Error handling</p>
+                            <p>Obsługa błędów</p>
                             <pre><code class="hljs">
 const makeRequest = async () => {
-    try {
-        console.log(await getJSON());
-    } catch (err) {
-        console.error(err);
-    }
+  try {
+    console.log(await fetch("endpoint"));
+  } catch (err) {
+    console.error(err);
+  }
 };
                       </code></pre>
                   </div>
               </section>
           </section>
-				<section data-background="images/tony.gif">
-					<h2>Huge new possibilities!</h2>
+          <section>
+              <h3>Opcjonalny parametr catch (ES10)</h3>
+              <pre><code class="hljs">
+const makeRequest = async () => {
+  try {
+    console.log(await fetch("endpoint"));
+  } catch {
+    console.error("Jakiś błąd, nieważne jaki");
+  }
+};
+              </code></pre>
+          </section>
+          <section>
+              <h3>Promise.prototype.finally() (ES9)</h3>
+              <pre><code class="hljs">
+fetch("endpoint")
+  .then(() => console.log("then"))
+  .catch(() => console.log("catch"))
+  .finally(() => console.log("finally"))
+              </code></pre>
+          </section>
+          <section>
+              <h3>Rest i spread w obiektach (ES9)</h3>
+              <pre><code class="hljs">
+const a = {
+  a: "a"
+  b: "b1"
+};
+
+const b = {
+  ...a,
+  b: "b2"
+}; // { a: "a", b: "b2" }
+              </code></pre>
+          </section>
+          <section>
+            <section>
+              <h3>Metody flat i flatMap tablic (ES10)</h3>
+              <pre><code class="hljs">
+let tab = [1, 2, 3, [4, 5, 6]];
+
+tab.flat(); // [1, 2, 3, 4, 5, 6];
+
+tab.flat().flat().flat().flat();
+tab.flat(3);
+              </code></pre>
+            </section>
+            <section>
+                <h3>Metody flat i flatMap tablic (ES10)</h3>
+                <pre><code class="hljs">
+  let tab = [1, 2, 3, 4];
+  
+  tab.flatMap(x => [x * 2]); // [2, 4, 6, 8];
+                </code></pre>
+              </section>
+          </section>
+          <section>
+              <h3>Metody trimStart i trimEnd obiektu String (ES10)</h3>
+              <pre><code class="hljs">
+let greeting = "     Tekst i spacje     ";
+
+greeting.trimEnd(); // "     Tekst i spacje";
+
+greeting.trimStart(); // "Tekst i spacje";
+              </code></pre>
+          </section>
+				<section data-background="images/tony.gif" data-background-opacity="0.3">
+					<h2>Nowe wersje ES to nowe, ogromne możliwości!</h2>
 				</section>
 				<section>
-					<h3>Thank You ;)</h3>
+          <h3>Dziękuję!</h3>
+          <p class="fragment red">Czas na Q/A!</p>
 				</section>
 			</div>
 		</div>
