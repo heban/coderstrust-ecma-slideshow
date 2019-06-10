@@ -44,19 +44,35 @@
 				<section>
 					<section>
 						<h3>Czym jest ECMAScript?</h3>
-						<p>
-							ECMAScript is the name of the standardized specification of the scripting language JavaScript
+						<h6 class="fragment">
+							ECMAScript to specyfikacja opisująca obiektowy język ogólnego przeznaczenia
+            </h6>
+            <p class="fragment">
+							Można o nim powiedzieć, że jest to "metajęzyk" będący standardem dla innych języków
+            </p>
+            <p class="fragment red">
+							I nie da się w nim nic napisać, ponieważ opisuje on tylko składnie
 						</p>
+          </section>
+          <section>
+						<h3>Implementacje ECMAScript</h3>
+						<ul>
+							<li class="fragment">JavaScript</li>
+							<li class="fragment">ActionScript</li>
+							<li class="fragment">JScript</li>
+						</ul>
 					</section>
 					<section>
-						<h3>ES Versions</h3>
+						<h3>Wersje ES</h3>
 						<ul>
-							<li>Before 2000 - ES1, ES2, <strong>ES3</strong></li>
-							<li>ES4 - abandoned</li>
-							<li>ES5/<strong>5.1</strong> - 2009/2011</li>
-							<li><strong>ES6</strong> - ES2015</li>
+							<li>Przed rokiem 2000 - ES1, ES2, <strong class="red">ES3</strong></li>
+							<li>ES4 - porzucone</li>
+							<li>ES5/<strong class="red">5.1</strong> - 2009/2011</li>
+							<li><strong class="red">ES6</strong> - ES2015</li>
 							<li><strong>ES7</strong> - ES2016</li>
-							<li><strong>ES8</strong> - ES2017 - hot! (String padding ;))</li>
+              <li><strong>ES8</strong> - ES2017</li>
+              <li><strong>ES9</strong> - ES2018</li>
+              <li><strong>ES10</strong> - ES2019</li>
 							<li><strong>ES.Next / ES Harmony</strong></li>
 						</ul>
 					</section>
@@ -64,20 +80,21 @@
 				<section data-background="images/es.gif">
 				</section>
 				<section>
-          <h4>ES 5.1 jest obsługiwany wszędzie</h4>
+          <h4>ES5.1 jest obsługiwany wszędzie</h4>
           <h4>Po co mamy się przejmować ES.Next?</h4>
-					<ul>
-						<li class="fragment">Bo to przyszłość</li>
-						<li class="fragment">Less problems with VanillaJS</li>
-						<li class="fragment">74% developers use it (<a href="http://stateofjs.com/2016/flavors/">http://stateofjs.com/2016/flavors/</a>)</li>
-						<li class="fragment">Really good support (<a href="http://kangax.github.io/compat-table/es6/">http://kangax.github.io/compat-table/es6/</a>)</li>
-					</ul>
+          <ul>
+            <li class="fragment">Bo to przyszłość</li>
+            <li class="fragment">Mniej problemów przy pisaniu w czystym JS</li>
+            <li class="fragment">Większość nowoczesnych bibliotek wykorzystuje nowości z ES.Next</li>
+            <li class="fragment">Jest używany przez 87% front-end deweloperów (<a href="https://2018.stateofjs.com/javascript-flavors/es6/">https://2018.stateofjs.com/javascript-flavors/es6/</a>)</li>
+            <li class="fragment">Przeglądarki adaptują nowości niezwykle szybko (<a href="http://kangax.github.io/compat-table/es6/">http://kangax.github.io/compat-table/es6/</a>)</li>
+          </ul>
 				</section>
 				<section>
 					<section>
-						<h3>Musketeers ES Toolbelt</h3>
+						<h3>Najważniejsze nowości</h3>
 						<ul>
-							<li>LET and CONST (ES6)</li>
+							<li>LET i CONST (ES6)</li>
 							<li>Classes (ES6)</li>
 							<li>Arrow Functions (ES6)</li>
 							<li>Modules (ES6)</li>
@@ -87,66 +104,77 @@
 						</ul>
 					</section>
 					<section>
-						<h3>And these things</h3>
+						<h3>I jeszcze te</h3>
 						<ul>
 							<li>Spread Operator (ES6/ES7)</li>
 							<li>Rest Parameters (ES6)</li>
 							<li>Default Parameters (ES6)</li>
-							<li>for...of (ES6)</li>
+							<li>for...of loop (ES6)</li>
 							<li>Destructuring Assignment (ES6)</li>
 							<li>Symbols, Maps, Sets (ES6)</li>
 						</ul>
 					</section>
 					<section>
-						<h3>And these...</h3>
+						<h3>I takie tam</h3>
 						<ul>
 							<li>Exponentiation operator (ES7)</li>
 							<li>New Array Methods (ES6/ES7)</li>
 							<li>Async Functions (ES8)</li>
 						</ul>
+          </section>
+          <section>
+						<h3>No dobra, to już ostatnie!</h3>
+						<ul>
+							<li>Promise.finally() (ES9)</li>
+							<li>Rest, Spread in objects (ES9)</li>
+              <li>Array.flat/flatMap (ES10)</li>
+              <li>String.trimStart/trimEnd (ES10)</li>
+              <li>Optional catch binding (ES10)</li>
+						</ul>
 					</section>
 				</section>
 				<section>
 					<section>
-						<h3>LET and CONST</h3>
+						<h3>LET i CONST</h3>
 						<div class="left-box">
-							<p>var - function scope</p>
+							<p><span class="red">var</span> - zasięg funkcyjny</p>
 						</div>
 						<div class="right-box">
-							<p>let/const - block scope</p>
+							<p><span class="red">let/const</span> - zasięg blokowy</p>
 						</div>
 					</section>
 					<section>
-						<h4>LET and CONST</h4>
+						<h4>LET i CONST</h4>
                         <div>
                             <pre><code class="hljs">
-const key = 'abc123';
+const key = "abc123";
 let points = 50;
 let winner = false;
 
 if (points > 40) {
-   let winner = true; // different variable
+  let winner = true; // nowa zmienna
 }
                             </code></pre>
                         </div>
 					</section>
                     <section>
-                        <h4>LET and CONST</h4>
+                        <h4>LET i CONST</h4>
                         <p>Temporal Dead Zone</p>
                         <div>
                             <pre><code class="hljs">
 function do_something() {
-    console.log(bar); // undefined
-    console.log(foo); // ReferenceError
-    var bar = 1;
-    let foo = 2;
+  console.log(bar); // undefined
+  console.log(foo); // ReferenceError
+
+  var bar = 1;
+  let foo = 2;
 }
                             </code></pre>
                         </div>
                     </section>
                     <section>
-                        <h4>LET and CONST</h4>
-                        <p>You can't change const!</p>
+                        <h4>LET i CONST</h4>
+                        <p>Nie można nadpisać zmiennej const!</p>
                         <div>
                             <pre><code class="hljs">
 const key = 'abc123';
@@ -156,77 +184,76 @@ key = 12; // TypeError
                         </div>
                     </section>
                     <section>
-                        <h4>LET and CONST</h4>
-                        <p>But You can modify const objects!</p>
+                        <h4>LET i CONST</h4>
+                        <p>Ale można modyfikować obiekty zadeklarowane z użyciem const!</p>
                         <div>
                             <pre><code class="hljs">
 const person = {
-    name: 'John',
-    age: 22
+  name: 'John',
+  age: 22
 }
 
-person.age = 29;  // it's ok!
+person.age = 29;  // bez problemu!
                             </code></pre>
                         </div>
                     </section>
 				</section>
                 <section>
                     <section>
-                        <h3>Classes</h3>
-                        ć
-                        <p class="fragment">Classes provide a much simpler and clearer syntax to create objects and deal with inheritance</p>
-                        <p class="fragment">The bodies of class declarations and class expressions are executed in strict mode</p>
+                        <h3>Klasy</h3>
+                        <p class="fragment">Klasy dostarczają prostszą i czytelniejszą składnie do tworzenia obiektów i dziedziczenia po innych</p>
+                        <p class="fragment">Zawartość deklaracji i wyrażenia klasowego jest wykonywana w tzw. "strict mode"</p>
                     </section>
                     <section>
-                        <h4>Classes</h4>
-                        <p>Before</p>
+                        <h4>Klasy</h4>
+                        <p>Kiedyś</p>
                         <pre><code class="hljs">
-function Vehicle (name, type) {
-    this.name = name;
-    this.type = type;
+function Vehicle(name, type) {
+  this.name = name;
+  this.type = type;
 };
  
-Vehicle.prototype.getName = function getName () {
-    return this.name;
+Vehicle.prototype.getName = function getName() {
+  return this.name;
 };
  
-Vehicle.prototype.getType = function getType () {
-    return this.type;
+Vehicle.prototype.getType = function getType() {
+  return this.type;
 };
                         </code></pre>
                     </section>
                     <section>
-                        <h4>Classes</h4>
-                        <p>Now</p>
+                        <h4>Klasy</h4>
+                        <p>Obecnie</p>
                         <pre><code class="hljs">
 class Vehicle {
-    constructor(name, type) {
-        this.name = name;
-        this.type = type;
-    }
+  constructor(name, type) {
+    this.name = name;
+    this.type = type;
+  }
 
-    getName() {
-        return this.name;
-    }
+  getName() {
+    return this.name;
+  }
 
-    getType() {
-        return this.type;
-    }
+  getType() {
+    return this.type;
+  }
 }
                         </code></pre>
                     </section>
                     <section>
                         <h4>Classes</h4>
-                        <p>Simplier inheritance</p>
+                        <p>Prostsze dziedziczenie</p>
                         <pre><code class="hljs">
 class Car extends Vehicle {
-    constructor(name) {
-        super(name, 'car');
-    }
+  constructor(name) {
+    super(name, "car");
+  }
 
-    getName() {
-        return 'It is a car: ' + super.getName();
-    }
+  getName() {
+    return "Jestem pojazdem: " + super.getName();
+  }
 }
                         </code></pre>
                     </section>
@@ -235,33 +262,38 @@ class Car extends Vehicle {
                         <p>get / set / static</p>
                         <pre><code class="hljs">
 class Car {
-    constructor(name) {
-        this._name = name;
-    } 
+  constructor(name) {
+    this._name = name;
+  } 
 
-    set name(name) {
-        this._name = name;
-    }
+  set name(name) {
+    this._name = name;
+  }
 
-    get name() {
-        return this._name;
-    }
+  get name() {
+    return this._name;
+  }
 
-    static create(name, type) {
-        return new Car(name, type);
-    }
+  static create(name, type) {
+    return new Car(name, type);
+  }
 }
-Car.create("Ford", "car"); // return new Car
+
+const newCar = new Car("Fiat Multipla");
+newCar.name = "Fiat 500";
+console.log(newCar.name); // Zwróci "Fiat 500"
+
+Car.create("Ford", "car"); // Zwraca nowy obiekt typu Car
                         </code></pre>
                     </section>
                     <section>
                         <h4>Classes</h4>
-                        <p>Class expression</p>
+                        <p>Wyrażenia klasowe</p>
                         <pre><code class="hljs">
 let Car = class {
-    constructor(name) {
-        this._name = name;
-    }
+  constructor(name) {
+    this._name = name;
+  }
 };
                         </code></pre>
                     </section>
@@ -274,7 +306,7 @@ let Car = class {
                             <p>Before</p>
                             <pre><code class="hljs">
 var test = function (value) {
-    return value * 2;
+  return value * 2;
 };
                             </code></pre>
                         </div>
@@ -282,7 +314,7 @@ var test = function (value) {
                             <p>Now</p>
                             <pre><code class="hljs">
 let test = (value) => {
-    return value * 2;
+  return value * 2;
 };
                             </code></pre>
                         </div>
@@ -293,7 +325,7 @@ let test = (value) => {
                             <p>IIFE with Arrow Function</p>
                             <pre><code class="hljs">
 (() => {
-    // some code
+  // some code
 }());
                             </code></pre>
                         </div>
