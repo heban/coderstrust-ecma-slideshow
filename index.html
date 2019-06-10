@@ -103,7 +103,7 @@
 							<li>Default Parameters (ES6)</li>
 							<li>for...of loop (ES6)</li>
 							<li>Destructuring Assignment (ES6)</li>
-							<li>Symbols, Maps, Sets (ES6)</li>
+							<li>Symbols, Maps, Sets, Proxy (ES6)</li>
 						</ul>
 					</section>
 					<section>
@@ -317,7 +317,7 @@ const test = (value) => {
                             <p>Funkcja natychmiastowa z użyciem funkcji strzałkowej</p>
                             <pre><code class="hljs">
 (() => {
-  // some code
+  // jakiś kod
 }());
                             </code></pre>
                         </div>
@@ -365,28 +365,52 @@ function Person() {
                 <section>
                     <section>
                         <h3>Moduły</h3>
-                        <p>Now we can write modular JS code natively!</p>
-                        <p class="fragment">ES6 Modules are in strict mode by default (bye bye "use strict")</p>
+                        <p>Dzięki nim jesteśmy w stanie pisać złożone aplikacje podzielone na wiele modułów!</p>
+                        <p class="fragment">Moduły ES6 mają włączony domyślnie "strict mode" <span class="red">(żegnaj "use strict")</span></p>
                     </section>
                     <section>
-                        <h4>Modules</h4>
+                        <h4>Moduły</h4>
+                        <div>
+                          <p>Dawne dzieje</p>
+                            <pre><code class="hljs">
+;(function() {
+  "use strict";
+
+  // reszta logiki aplikacji
+}(window));
+                            </code></pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h4>Moduły</h4>
+                        <p>Importowanie funkcji/bibliotek</p>
+                        <div>
+                            <pre><code class="hljs">
+import { square, diag } from 'lib';
+import test from 'lib';
+
+console.log(square(11));   // 121
+
+console.log(diag(4, 3));   // 5
+                            </code></pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h4>Moduły</h4>
+                        <p>Eksportowanie funkcji/bibliotek</p>
                         <div>
                             <pre><code class="hljs">
 export const sqrt = Math.sqrt;
+
 export function square(x) {
-    return x * x;
+  return x * x;
 }
-export  function diag(x, y) {
-    return sqrt(square(x) + square(y));
+
+export function diag(x, y) {
+  return sqrt(square(x) + square(y));
 }
 
 export default function test() { return "test"; }
-
-// ------ 
-import { square, diag } from 'lib';
-import test from 'lib';
-console.log(square(11));   // 121
-console.log(diag(4, 3));   // 5
                             </code></pre>
                         </div>
                     </section>
@@ -395,45 +419,45 @@ console.log(diag(4, 3));   // 5
                     <section>
                         <h3>Template Literals</h3>
                         <div class="left-box">
-                            <p>Before</p>
+                            <p>Kiedyś</p>
                             <pre><code class="hljs">
-let ob = "world";
-console.log("Hello " + world);
+let word = "world";
+console.log("Hello " + word);
                             </code></pre>
                         </div>
                         <div class="right-box">
-                            <p>Now</p>
+                            <p>Obecnie</p>
                             <pre><code class="hljs">
-let ob = "world";
-console.log(`Hello ${world}`);
+let word = "world";
+console.log(`Hello ${word}`);
                             </code></pre>
                         </div>
                     </section>
                     <section>
                         <h3>Template Literals</h3>
                         <div>
-                            <p>Loop example</p>
+                            <p>Przykład pętli</p>
                             <pre><code class="hljs">
 ${movies.map(movie => `<li class="filmotique-movie col-xs-12 col-md-4">
-    <div class="box">
-        <span class="movie-title">${movie.title}</span>
-        <span class="movie-date">${movie.release_date}</span>
-    </div>
+  <div class="box">
+    <span class="movie-title">${movie.title}</span>
+    <span class="movie-date">${movie.release_date}</span>
+  </div>
 </li>`).join("")};
                             </code></pre>
                         </div>
                     </section>
                     <section>
-                        <h3>Multi-line strings</h3>
+                        <h3>Teksty wielolinijkowe</h3>
                         <div>
-                            <p>Before</p>
+                            <p>Kiedyś</p>
                             <pre><code class="hljs">
 let text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\t" 
            + "Morbi ornare sapien in consequat pellentesque.";
                             </code></pre>
                         </div>
                         <div>
-                            <p>Now</p>
+                            <p>Obecnie</p>
                             <pre><code class="hljs">
 let text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                Morbi ornare sapien in consequat pellentesque.`;
@@ -443,108 +467,108 @@ let text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </section>
                 <section>
                     <section>
-                        <h3>Promises</h3>
+                        <h3>Promises (obietnice)</h3>
+                        <p>Czytelny sposób na pisanie kodu asynchronicznego</p>
                         <div>
                             <pre><code class="hljs">
-
 let wait = new Promise((resolve, reject) => {
-    setTimeout(resolve, 1000);
+  setTimeout(resolve, 1000);
 }).then(() => {
-    console.log('WoW');
+  console.log('WoW');
 });
 
-let wait2 = new Promise((resolve, reject) => {
-    setTimeout(resolve, 1000);
+const wait2 = () => new Promise((resolve, reject) => {
+  setTimeout(resolve, 1000);
 });
 
-wait2.then((val) => {
-    console.log(val);
+wait2().then((val) => {
+  console.log(val);
 }).catch((err) => {
-    console.log(err.message);
+  console.log(err.message);
 });
                             </code></pre>
                         </div>
                     </section>
                     <section>
                         <h4>Promises</h4>
-                        <p>More than one</p>
+                        <p>Więcej niż jedna</p>
                         <div>
                             <pre><code class="hljs">
-let urls = {  
-    'http://www.api.com/items/1234',
-    'http://www.api.com/items/4567'
-},
-itemPromises = urls.map(fetchJSON);
+const urls = [ 
+  'http://www.api.com/items/1234',
+  'http://www.api.com/items/4567'
+],
+itemPromises = urls.map(fetch);
 
 Promise.all(itemPromises)  
-    .then(function(results) {
-        results.forEach(function(item) {
-            // process item
-        });
-    })
-    .catch(function(err) {
-        console.log(`Failed: ${err}`);
+  .then(function(results) {
+    results.forEach(function(item) {
+      // process item
     });
+  })
+  .catch(function(err) {
+    console.log(`Failed: ${err}`);
+  });
                             </code></pre>
                         </div>
                     </section>
                 </section>
                 <section>
                     <section>
-                        <h4>Enhanced Object Literal</h4>
-                        <p>Property Value Shorthand</p>
+                        <h4>Rozszerzony literał obiektu</h4>
+                        <p>Skrócony zapis właściwości</p>
                         <div class="left-box">
-                            <p>Before</p>
+                            <p>Kiedyś</p>
                             <pre><code class="hljs">
 function f(x, y) {
-    return { 
-        x: x, 
-        y: y 
-    };
+  return { 
+    x: x, 
+    y: y 
+  };
 }
                             </code></pre>
                         </div>
                         <div class="right-box">
-                            <p>Now</p>
+                            <p>Obecnie</p>
                             <pre><code class="hljs">
 function f(x, y) {
-    return { 
-        x, 
-        y
-    };
+  return { 
+    x, 
+    y
+  };
 }
                             </code></pre>
                         </div>
                     </section>
                     <section>
-                        <h4>Enhanced Object Literal</h4>
-                        <p>Method Definition Shorthand</p>
+                        <h4>Rozszerzony literał obiektu</h4>
+                        <p>Skrócona deklaracja metod</p>
                         <div class="left-box">
-                            <p>Before</p>
+                            <p>Kiedyś</p>
                             <pre><code class="hljs">
 let ob = {
-    method: function() {
-        return "Hello!";
-    }
+  method: function() {
+    return "Hello!";
+  }
 };
                             </code></pre>
                         </div>
                         <div class="right-box">
-                            <p>Now</p>
+                            <p>Obecnie</p>
                             <pre><code class="hljs">
 let ob = {
-    method() {
-        return "Hello!";
-    }
+  method() {
+    return "Hello!";
+  }
 };
                             </code></pre>
                         </div>
                     </section>
                     <section>
-                        <h4>Enhanced Object Literal</h4>
-                        <p>Computed Object Keys</p>
+                        <h4>Rozszerzony literał obiektu</h4>
+                        <p>Dynamiczne klucze</p>
                         <div>
-                            <p>Before</p>
+                            <p>Kiedyś</p>
                             <pre><code class="hljs">
 let ob = {};
 let dynamicKey = "dynamic" + Date.now();
@@ -552,10 +576,10 @@ ob[dynamicKey] = "test";
                             </code></pre>
                         </div>
                         <div>
-                            <p>Now</p>
+                            <p>Obecnie</p>
                             <pre><code class="hljs">
 let ob = {
-    ["dynamic" + Date.now()]: "test"
+  ["dynamic" + Date.now()]: "test"
 };
                             </code></pre>
                         </div>
@@ -566,12 +590,15 @@ let ob = {
                         <h3>Spread operator</h3>
                         <div>
                             <pre><code class="hljs">
-function myFunction(x, y, z) { }
-let args = [0, 1, 2];
+function myFunction(x, y, z) { ... }
+const args = [0, 1, 2];
+
 myFunction(...args);
 
-function myFunction(v, w, x, y, z) { }
-let args = [0, 1];
+
+function myFunction(v, w, x, y, z) { ... }
+const args = [0, 1];
+
 myFunction(-1, ...args, 2, ...[3]);
                             </code></pre>
                         </div>
@@ -595,23 +622,23 @@ let clonedObj = { ...obj1 };
                     <section>
                         <h4>Spread operator</h4>
                         <div>
-                            <p>Before</p>
+                            <p>Kiedyś</p>
                             <pre><code class="hljs">
 function modifyState(state, modifiedValue) {
-    return Object.assign({}, state, {
-        field: modifiedValue
-    });
+  return Object.assign({}, state, {
+    field: modifiedValue
+  });
 }
                             </code></pre>
                         </div>
                         <div>
-                            <p>Now</p>
+                            <p>Obecnie</p>
                             <pre><code class="hljs">
 function modifyState(state, modifiedValue) {
-    return {
-        ...state, 
-        field: modifiedValue 
-    };
+  return {
+    ...state, 
+    field: modifiedValue 
+  };
 }
                             </code></pre>
                         </div>
@@ -623,58 +650,58 @@ function modifyState(state, modifiedValue) {
                         <div>
                             <pre><code class="hljs">
 function consoleOut(something, ...somethingElse) {
-    console.log(something);
-    console.log(somethingElse);
+  console.log(something);
+  console.log(somethingElse);
 }
 
 consoleOut("test", 1, 2, 3, 4);
 // "test", 1, 2, 3, 4
 
-let array = [1, 2, 3];   // Achtung!
-consoleOut(...array);    // It's spread operator, not rest!
+let array = [1, 2, 3];   // Uwaga!
+consoleOut(...array);    // To spread operator, nie rest!
                             </code></pre>
                         </div>
                     </section>
 					<section>
 						<h4>Rest parameters</h4>
 						<div>
-							<p>Before</p>
+							<p>Kiedyś</p>
 							<pre><code class="hljs">
 function argsFun() {
-    var args = Array.prototype.slice.call(arguments);
-    args.forEach(function (arg) {
-        console.log(arg);
-    });
+  var args = Array.prototype.slice.call(arguments);
+  args.forEach(function (arg) {
+    console.log(arg);
+  });
 }
 							</code></pre>
 						</div>
 						<div>
-							<p>Now</p>
+							<p>Obecnie</p>
 							<pre><code class="hljs">
 function argsFun(...args) {
-    args.forEach(function (arg) {
-        console.log(arg);
-    });
+  args.forEach((arg) => {
+    console.log(arg);
+  });
 }
 							</code></pre>
 						</div>
 					</section>
 				</section>
                 <section>
-                    <h3>Default parameters</h3>
+                    <h3>Parametry domyślne</h3>
                     <div>
                         <pre><code class="hljs">
 function multiply(a, b = 1) {
-    return a * b;
+  return a * b;
 }
 
 multiply(2, 2); // 4
 multiply(2, 1); // 2
 multiply(2);    // 2
 
-// you can pass even other functions!
+// przekazywanie wyniku funkcji? Nie ma problemu!
 function arrayMultiply(a, b = multiply(2)) {
-    return [a, b];
+  return [a, b];
 }
 
 arrayMultiply(1); // [1, 2]
@@ -683,18 +710,18 @@ arrayMultiply(1); // [1, 2]
                 </section>
                 <section>
                     <section>
-                        <h3>For...of</h3>
-                        <p>New loop for iterable objects: Array, String, Map, Set, arguments etc.</p>
+                        <h3>Pętla For...of</h3>
+                        <p>Nowy rodzaj pętli dla obiektów po których można iterować np. dla Array, String, Map, Set, parametru arguments itd.</p>
                     </section>
                     <section>
-                        <h4>For...of</h4>
+                        <h4>Pętla For...of</h4>
                         <div>
                             <pre><code class="hljs">
 let iterable = [10, 20, 30];
 
 for (let value of iterable) {
-    value += 1;
-    console.log(value);
+  value += 1;
+  console.log(value);
 }
 // 11
 // 21
@@ -703,14 +730,14 @@ for (let value of iterable) {
                         </div>
                     </section>
                     <section>
-                        <h4>For...of</h4>
-                        <p>Example with string</p>
+                        <h4>Pętla For...of</h4>
+                        <p>Przykład ze stringiem</p>
                         <div>
                             <pre><code class="hljs">
 let iterable = 'boo';
 
 for (let value of iterable) {
-    console.log(value);
+  console.log(value);
 }
 // "b"
 // "o"
@@ -718,10 +745,38 @@ for (let value of iterable) {
                             </code></pre>
                         </div>
                     </section>
+                    <section>
+                        <h4>Pętla For...of</h4>
+                        <p>Przykład z obiektem</p>
+                        <div class="left-box">
+                            <p>Kiedyś</p>
+                            <pre><code class="hljs">
+let iterable = {
+  a: 1
+};
+
+for (var key in iterable) {
+  console.log(iterable[key]); // 1 i coś jeszcze...
+}
+                            </code></pre>
+                        </div>
+                        <div class="right-box">
+                            <p>Obecnie</p>
+                            <pre><code class="hljs">
+let iterable = {
+  a: 1
+};
+
+for (let key of iterable) {
+  console.log(iterable[key]); // 1
+}
+                            </code></pre>
+                        </div>
+                    </section>
                 </section>
                 <section>
                     <section>
-                        <h3>Object Destructuring</h3>
+                        <h3>Destrukturyzacja obiektu</h3>
                         <div>
                             <pre><code class="hljs">
 let foo = { bar: 'test', baz: 3 };
@@ -734,8 +789,8 @@ console.log(fooz);  //  undefined
                         </div>
                     </section>
                     <section>
-                        <h4>Object Destructuring</h4>
-                        <p>Aliases</p>
+                        <h4>Destrukturyzacja obiektu</h4>
+                        <p>Aliasy</p>
                         <div>
                             <pre><code class="hljs">
 let foo = { bar: 'test', baz: 3 };
@@ -747,11 +802,12 @@ console.log(b);  //  3
                         </div>
                     </section>
                     <section>
-                        <h4>Object Destructuring</h4>
-                        <p>Pulling properties from object</p>
+                        <h4>Destrukturyzacja obiektu</h4>
+                        <p>Wyciąganie właściwości z obiektu</p>
                         <div>
                             <pre><code class="hljs">
 let foo = { bar: { a: 'test', b: 'lol' } };
+
 let { bar: { a, b: c } } = foo;
 
 console.log(a);  //  'test'
@@ -760,8 +816,8 @@ console.log(c);  //  'lol'
                         </div>
                     </section>
                     <section>
-                        <h4>Object Destructuring</h4>
-                        <p>Dynamic keys</p>
+                        <h4>Destrukturyzacja obiektu</h4>
+                        <p>Dynamiczne klucze</p>
                         <div>
                             <pre><code class="hljs">
 let key = 'test';
@@ -769,25 +825,31 @@ let { [key]: foo } = { test: 'bar' };
 console.log(foo);  //  'bar'
                             </code></pre>
                         </div>
-                        <p>Default values</p>
+                        <p>Domyślne wartości</p>
                         <div>
                             <pre><code class="hljs">
-var { foo=2 } = { foo: undefined };
+let { foo = 2 } = { foo: undefined };
 console.log(foo);  // 2
                             </code></pre>
                         </div>
                     </section>
                     <section>
-                        <h4>Object Destructuring</h4>
-                        <p>Destructuring in parameters</p>
+                        <h4>Destrukturyzacja obiektu</h4>
+                        <p>Destrukturyzacja w parametrach</p>
                         <div>
                             <pre><code class="hljs">
-let ob = {a: 1, b: 2, c: 3};
-function returnOb({ a, b, c}) { ... }
-returnOb(ob); 
+const ob = {
+  a: 1,
+  b: 2,
+  c: 3
+};
+
+function getObject({ a, b, c }) { ... }
+
+getObject(ob); 
                             </code></pre>
                         </div>
-                        <p>Destructuring in import statement</p>
+                        <p>Destrukturyzacja w wyrażeniu import</p>
                         <div>
                             <pre><code class="hljs">
 import { map, foreach } from "lodash";
@@ -795,8 +857,8 @@ import { map, foreach } from "lodash";
                         </div>
                     </section>
                     <section>
-                        <h4>Object Destructuring</h4>
-                        <p>Destructuring arrays</p>
+                        <h4>Destrukturyzacja obiektu</h4>
+                        <p>Destrukturyzacja tablic</p>
                         <div>
                             <pre><code class="hljs">
 let letters = ['a', 'b', 'c];
@@ -810,8 +872,8 @@ let [, b, c] = letters;
                         </div>
                     </section>
                     <section>
-                        <h4>Object Destructuring</h4>
-                        <p>Swapping variables</p>
+                        <h4>Destrukturyzacja obiektu</h4>
+                        <p>Zamiana wartości zmiennych</p>
                         <div>
                             <pre><code class="hljs">
 let a = 1, b = 2;
@@ -825,28 +887,28 @@ console.log(b); // 1
                 </section>
                 <section>
                     <section>
-                        <h3>Symbols, Maps, Sets</h3>
-                        <p>New types of objects</p>
+                        <h3>Symbols, Maps, Sets, Proxy</h3>
+                        <p>Nowe typy obiektów</p>
                     </section>
                     <section>
                         <h3>Symbol</h3>
                         <div>
-                            <p>They are tokens that serve as unique IDs</p>
+                            <p>Są to tzw. tokeny zwracające za każdym razem unikalny identyfikator</p>
                             <pre><code class="hljs">
 let symbol1 = Symbol();
 let symbol2 = Symbol('symbol2');
                             </code></pre>
                         </div>
                         <div>
-                            <p>Every symbol returned by Symbol() is unique</p>
+                            <p>Każdy symbol zwrócony przez funkcję Symbol() jest unikalny</p>
                             <pre><code class="hljs">
 symbol1 === symbol2; // false
                             </code></pre>
                         </div>
                     </section>
                     <section>
-                        <h3>Map</h3>
-                        <p>The Map object holds key-value pairs</p>
+                        <h3>Map (słownik)</h3>
+                        <p>Mapa przechowuje pary klucz - wartość</p>
                         <div>
                             <pre><code class="hljs">
 let map = new Map();
@@ -862,31 +924,34 @@ map.has('foo');  // false
                     </section>
                     <section>
                         <h4>Map</h4>
-                        <p>Setting items in constructor</p>
+                        <p>Ustawienie elementów w konstruktorze</p>
                         <div>
                             <pre><code class="hljs">
 let map = new Map([
-    [ 1, 'one' ],
-    [ 2, 'two' ],
-    [ 3, 'three' ]
+  [ 1, 'one' ],
+  [ 2, 'two' ],
+  [ 3, 'three' ]
 ]);
                             </code></pre>
                         </div>
                     </section>
                     <section>
                         <h4>WeakMap</h4>
-                        <p>Similiar to standard Map object but every key has to be an object</p>
-                        <p>WeakMap doesn’t prevent its keys from being garbage-collected</p>
+                        <p>Podobny do zwykłego obiektu Map, ale w tym przypadku każdy klucz musi być obiektem</p>
+                        <p>WeakMap nie posiada silnych referencji dla kluczy, zapobiega więc wyciekom pamięci gdy obiekty przestaną istnieć</p>
                         <div>
                             <pre><code class="hljs">
-var map = new WeakMap();
+const map = new WeakMap();
 map.set(1, 2);
 // TypeError: 1 is not an object!
+
+const map = new WeakMap();
+map.set({ a: 1 }, 2);
                             </code></pre>
                         </div>
                     </section>
                     <section>
-                        <h4>Set</h4>
+                        <h4>Set (zbiór)</h4>
                         <p>It’s a collection for unique values</p>
                         <div>
                             <pre><code class="hljs">
@@ -894,6 +959,7 @@ let set = new Set();
 set.add(1);
 set.add('1');
 set.add({ key: 'value' });
+
 console.log(set); // Set {1, '1', Object {key: 'value'}}
                             </code></pre>
                         </div>
@@ -908,6 +974,7 @@ let set = new WeakSet();
 set.add(1);
 set.add('1');
 set.add({ key: 'value' });
+
 console.log(set); // WeakSet {1, '1', Object {key: 'value'}}
                             </code></pre>
                         </div>
