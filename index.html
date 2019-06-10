@@ -81,7 +81,27 @@
             <li class="fragment">Jest używany przez 87% front-end deweloperów (<a href="https://2018.stateofjs.com/javascript-flavors/es6/">https://2018.stateofjs.com/javascript-flavors/es6/</a>)</li>
             <li class="fragment">Przeglądarki adaptują nowości niezwykle szybko (<a href="http://kangax.github.io/compat-table/es6/">http://kangax.github.io/compat-table/es6/</a>)</li>
           </ul>
-				</section>
+        </section>
+        <section>
+          <section>
+            <h4>W jaki sposób dodawane są nowe funkcjonalności do ES?</h4>
+            <ul>
+              <li class="fragment">Nad wszystkim czuwa komisja TC39</li>
+              <li class="fragment">Proces dodawanie nowych funkcjonalności składa się z 5 etapów</li>
+            </ul>
+          </section>
+          <section>
+            <h4>Etapy powstawania standardu</h4>
+            <ul>
+              <li class="fragment">Etap 0 - opisanie pomysłu</li>
+              <li class="fragment">Etap 1 - zgłoszenie formalnej propozycji (papierologia)</li>
+              <li class="fragment">Etap 2 - tzw. etap szkicu gdzie funkcjonalność powinna być już kompletna</li>
+              <li class="fragment">Etap 3 - funkcjonalność w pełni ukończona, zbierane są opinie</li>
+              <li class="fragment">Etap 4 - testy funkcjonalności, po ich przejściu nowy element wchodzi do standardu</li>
+            </ul>
+            <a class="fragment" href="https://github.com/tc39/proposals" target="_blank">https://github.com/tc39/proposals</a>
+          </section>
+        </section>
 				<section>
 					<section>
 						<h3>Najważniejsze nowości</h3>
@@ -124,7 +144,7 @@
               <li>Optional catch binding (ES10)</li>
 						</ul>
 					</section>
-				</section>
+        </section>
 				<section>
 					<section>
 						<h3>LET i CONST</h3>
@@ -421,7 +441,7 @@ export default function test() { return "test"; }
                         <div class="left-box">
                             <p>Kiedyś</p>
                             <pre><code class="hljs">
-let word = "world";
+var word = "world";
 console.log("Hello " + word);
                             </code></pre>
                         </div>
@@ -469,19 +489,40 @@ let text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     <section>
                         <h3>Promises (obietnice)</h3>
                         <p>Czytelny sposób na pisanie kodu asynchronicznego</p>
+                        <p class="red fragment">Proste rozwiązanie na tzw. callback hell</p>
+                        <div class="fragment">
+                            <pre><code class="hljs">
+first(function() {
+  second(function() {
+    third(function() {
+      // kolejne poziomy zagnieżdzeń aż do uzyskania rezultatu
+    }, function () {
+      // obsługa błędów funkcji third
+    });
+  }, function () {
+    // obsługa błędów funkcji second
+  });
+}, function () {
+  // obsługa błędów funkcji first
+});
+                            </code></pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h5>Promises</h5>
                         <div>
                             <pre><code class="hljs">
-let wait = new Promise((resolve, reject) => {
+let first = new Promise((resolve, reject) => {
   setTimeout(resolve, 1000);
 }).then(() => {
   console.log('WoW');
 });
 
-const wait2 = () => new Promise((resolve, reject) => {
+const second = () => new Promise((resolve, reject) => {
   setTimeout(resolve, 1000);
 });
 
-wait2().then((val) => {
+second().then((val) => {
   console.log(val);
 }).catch((err) => {
   console.log(err.message);
@@ -952,7 +993,7 @@ map.set({ a: 1 }, 2);
                     </section>
                     <section>
                         <h4>Set (zbiór)</h4>
-                        <p>It’s a collection for unique values</p>
+                        <p>Kolekcja unikalnych wartości</p>
                         <div>
                             <pre><code class="hljs">
 let set = new Set();
@@ -963,11 +1004,11 @@ set.add({ key: 'value' });
 console.log(set); // Set {1, '1', Object {key: 'value'}}
                             </code></pre>
                         </div>
-                        <p>Set doesn’t allow to add duplicates!</p>
+                        <p>Set nie pozwala na dodawanie duplikatów!</p>
                     </section>
                     <section>
                         <h4>WeakSet</h4>
-                        <p>Is a Set that doesn’t prevent its values from being garbage-collected</p>
+                        <p>Podobny do zwykłego Setu, lecz usuwa śmieciowe referencje</p>
                         <div>
                             <pre><code class="hljs">
 let set = new WeakSet();
@@ -978,7 +1019,35 @@ set.add({ key: 'value' });
 console.log(set); // WeakSet {1, '1', Object {key: 'value'}}
                             </code></pre>
                         </div>
-                        <p>WeakSet doesn’t allow to add duplicates!</p>
+                        <p>WeakSet także nie pozwala na dodawanie duplikatów</p>
+                    </section>
+                    <section>
+                        <h4>Proxy (obiekt pośredniczący)</h4>
+                        <div>
+                            <pre><code class="hljs">
+const proxy = new Proxy(target, handler);
+
+let person = new Proxy({}, {
+  set: function(obj, prop, value) {
+    if (prop === 'age') {
+      if (!Number.isInteger(value)) {
+        throw new TypeError('Podany wiek nie jest liczbą całkowitą!');
+      }
+    }
+
+    // domyślnym zachowaniem jest zapisanie wartości
+    obj[prop] = value;
+
+    // oznacza pomyślne wykonanie
+    return true;
+  }
+});
+
+person.age = 100;
+console.log(person.age); // 100
+person.age = "young"; // rzuca wyjątek
+                            </code></pre>
+                        </div>
                     </section>
                 </section>
 				<section>
@@ -986,7 +1055,7 @@ console.log(set); // WeakSet {1, '1', Object {key: 'value'}}
 					<div class="left-box">
 						<p>Kiedyś</p>
 						<pre><code class="hljs">
-Math.pow(2, 4);
+Math.pow(2, 2);
 						</code></pre>
 					</div>
 					<div class="right-box">
@@ -1112,7 +1181,7 @@ const makeRequest = async () => {
               </section>
           </section>
           <section>
-              <h3>Opcjonalny parametr catch (ES10)</h3>
+              <h5>Opcjonalny parametr catch (ES10)</h5>
               <pre><code class="hljs">
 const makeRequest = async () => {
   try {
@@ -1124,7 +1193,7 @@ const makeRequest = async () => {
               </code></pre>
           </section>
           <section>
-              <h3>Promise.prototype.finally() (ES9)</h3>
+              <h5>Promise.prototype.finally() (ES9)</h5>
               <pre><code class="hljs">
 fetch("endpoint")
   .then(() => console.log("then"))
@@ -1133,7 +1202,7 @@ fetch("endpoint")
               </code></pre>
           </section>
           <section>
-              <h3>Rest i spread w obiektach (ES9)</h3>
+              <h5>Rest i spread w obiektach (ES9)</h5>
               <pre><code class="hljs">
 const a = {
   a: "a"
@@ -1148,7 +1217,7 @@ const b = {
           </section>
           <section>
             <section>
-              <h3>Metody flat i flatMap tablic (ES10)</h3>
+              <h5>Metody flat i flatMap tablic (ES10)</h5>
               <pre><code class="hljs">
 let tab = [1, 2, 3, [4, 5, 6]];
 
@@ -1159,7 +1228,7 @@ tab.flat(3);
               </code></pre>
             </section>
             <section>
-                <h3>Metody flat i flatMap tablic (ES10)</h3>
+                <h5>Metody flat i flatMap tablic (ES10)</h5>
                 <pre><code class="hljs">
   let tab = [1, 2, 3, 4];
   
@@ -1168,7 +1237,7 @@ tab.flat(3);
               </section>
           </section>
           <section>
-              <h3>Metody trimStart i trimEnd obiektu String (ES10)</h3>
+              <h5>Metody trimStart i trimEnd obiektu String (ES10)</h5>
               <pre><code class="hljs">
 let greeting = "     Tekst i spacje     ";
 
@@ -1182,7 +1251,10 @@ greeting.trimStart(); // "Tekst i spacje";
 				</section>
 				<section>
           <h3>Dziękuję!</h3>
-          <p class="fragment red">Czas na Q/A!</p>
+          <p class="fragment red">Czas na Q&A!</p>
+          <a class="fragment" href="https://github.com/heban/coderstrust-ecma-slideshow" target="_blank">
+            https://github.com/heban/coderstrust-ecma-slideshow
+          </a>
 				</section>
 			</div>
 		</div>
